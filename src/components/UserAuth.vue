@@ -1,5 +1,32 @@
 <template>
 
+<body>
+    <div id="AuthUser" class="auth_user">
+        <section class="login">
+            <section class="login__container">
+                <h2>Inicia Sesión</h2>
+                <form v-on:submit.prevent="processAuthUser">
+                    <h3>Documento de identidad:</h3>
+                    <input class="input" type="text" v-model="user_in.username" placeholder="Documento de identidad">
+                    <h3>Contraseña:</h3>
+                    <input class="input" type="password" v-model="uuser_in.password" placeholder="*******">
+                    <button class="buttom">Iniciar sesión</button>
+                    <div class="login__container--remember-me">
+                        <label>
+                            <input type="checkbox" name="" id="cbox1" value="checkbos">Recuerdame
+                        </label>
+                        <a href="/">Olvidé mi contraseña</a>
+                    </div>
+                </form>
+                <p class="login__container--register">No tienes ninguna cuenta <a href="">Regístrate</a></p>
+            </section>
+        </section>
+        <!-- <section>
+            <img src="../assets/img/Loginimg.png" alt="">
+        </section>    -->
+    </div>
+</body>
+
 </template>
 
 <script>
@@ -7,68 +34,116 @@
 </script>
 
 <style>
-    .auth_user{
-        margin: 0;
-        padding: 0%;
-        height: 100%;
-        width: 100%;
-    
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
+    body {
+        height: 665px;
+        background-image: url("../assets/img/background.jpg");
+        background-size: 100%;
+  
     }
 
-    .container_auth_user {
-        border: 3px solid  #283747;
-        border-radius: 10px;
-        width: 25%;
-        height: 60%;
-        
+    .auth_user{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .login{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0px 30px;  
+        min-height: calc(100vh - 200px);  /* Altura permanece igual por mas grande que sea el alto de la pantalla (100 vH = view hight, indica el porcentaje que ve el usuario) 200px */
+    }
+
+    .login__container {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 2px solid white;
+        border-radius: 40px;
+        color: white;
+        padding: 60px 68px 40px;
+        min-height: 700px;
+        width: 300px;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+    }
+
+    .login__container h3{
+        color: black
+    }
+    .login__container h2{
+        color: rgb(85, 95, 192);
+    }
+
+    .login__container p{
+        color:grey;
+    }
+
+    .login__container--form{
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    }
+    .login__container--label{
+        font-size: 14px;
     }
 
-    .auth_user h2{
-        color: #283747;
-
+    .login__container--remember-me {
+        color: grey;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
     }
 
-    .auth_user form{
-        width: 50%;
+    .login__container--remember-me a {
+        color: grey;
+        font-size: 14px;
+        text-decoration: none;
+    }
+
+    .login__container--remember-me a:hover {
+        color: grey;
+        font-size: 14px;
+        text-decoration: underline;
+    }
+
+    .login__container--register {
+        font-size: 14px;
+    }
+
+    .login__container--register a {
+        font-size: 16px;
+        color:grey;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .login__container--register a:hover {
+        text-decoration: underline;
+    }
+    .input{ 
+        border-radius: 8px;
         
+        font-family: 'Mulish', sans-serif;
+        font-size: 20px;
+        margin-bottom: 20px;
+        padding: 0px 30px;
     }
 
-    .auth_user input{
-        height: 40px;
-        width: 100%;
-
-        box-sizing: border-box;
-        padding: 10px 20px;
-        margin: 5px 0;
-
-        border: 1px solid #283747;
-        
+    .buttom{
+        background-color: rgb(121, 173, 42);
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        font-family: 'Mulish', sans-serif;
+        height: 50px;
+        width: 300px;
+        letter-spacing: 1px;
+        margin: 10px 0px;
     }
 
-    .auth_user button{
-        width: 100%;
-        height: 40px;
-
-        color: #E5E7E9;
-        background: #283747;
-        border: 1px solid #E5E7E9;
-
-        border-radius: 5px;
-        padding: 10px 25px;
-        margin: 5px 0;
-    }
-
-    .auth_user button:hover{
-        color: #E5E7E9;
-        background: crimson;
-        border: 1px solid #283747;
+    ::placeholder{
+        font-size: 15px;
     }
 </style>
