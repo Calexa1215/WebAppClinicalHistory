@@ -2,7 +2,7 @@
 
 <body>
     <div id="AuthUser" class="auth_user">
-        <section class="login">
+        <div class="login">
             <section class="login__container">
                 <h2>Inicia Sesión</h2>
                 <form v-on:submit.prevent="processAuthUser">
@@ -20,10 +20,10 @@
                 </form>
                 <p class="login__container--register">No tienes ninguna cuenta <a href="">Regístrate</a></p>
             </section>
-        </section>
-        <!-- <section>
-            <img src="../assets/img/Loginimg.png" alt="">
-        </section>    -->
+            <section class="img__container">
+                <img src="../assets/img/Loginimg.png" alt="">
+            </section>
+        </div> 
     </div>
 </body>
 
@@ -34,49 +34,64 @@
 </script>
 
 <style>
-    body {
-        height: 665px;
-        background-image: url("../assets/img/background.jpg");
-        background-size: 100%;
-  
-    }
-
     .auth_user{
         display: flex;
         justify-content: center;
-        flex-direction: column;
     }
     .login{
+        background-color: white;
+        width: 800px;
         display: flex;
-        align-items: center;
+        align-items: center; 
         justify-content: center;
-        flex-direction: column;
         padding: 0px 30px;  
-        min-height: calc(100vh - 200px);  /* Altura permanece igual por mas grande que sea el alto de la pantalla (100 vH = view hight, indica el porcentaje que ve el usuario) 200px */
+        margin-top: 70px;
+        min-height: calc(100vh - 400px);  /* Altura permanece igual por mas grande que sea el alto de la pantalla (100 vH = view hight, indica el porcentaje que ve el usuario) 200px */
     }
 
     .login__container {
-        background-color: rgba(255, 255, 255, 0.1);
-        border: 2px solid white;
-        border-radius: 40px;
-        color: white;
         padding: 60px 68px 40px;
-        min-height: 700px;
+        min-height: 400px;
         width: 300px;
         display: flex;
         justify-content: space-around;
         flex-direction: column;
+        text-align: justify;
     }
+    /* .img__container {
+        padding: 60px 68px 40px;
+        min-height: 500px;
+        width: 300px;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        text-align: justify;
+    } */
+
+    .img__container img {
+        margin: 0;
+        height: 600px;
+        width: 400px;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        text-align: justify;
+
+    }
+    
 
     .login__container h3{
-        color: black
+        color: black;
     }
     .login__container h2{
+        font-size: 40px;
+        font-weight: bold;
         color: rgb(85, 95, 192);
+        margin-left: 60px;
     }
 
     .login__container p{
-        color:grey;
+        color:black;
     }
 
     .login__container--form{
@@ -88,20 +103,20 @@
     }
 
     .login__container--remember-me {
-        color: grey;
+        color: black;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         margin-top: 10px;
     }
 
     .login__container--remember-me a {
-        color: grey;
+        color: black;
         font-size: 14px;
         text-decoration: none;
     }
 
     .login__container--remember-me a:hover {
-        color: grey;
+        color: rgb(85, 95, 192);
         font-size: 14px;
         text-decoration: underline;
     }
@@ -112,7 +127,7 @@
 
     .login__container--register a {
         font-size: 16px;
-        color:grey;
+        color:rgb(85, 95, 192);
         font-weight: bold;
         text-decoration: none;
     }
@@ -122,7 +137,6 @@
     }
     .input{ 
         border-radius: 8px;
-        
         font-family: 'Mulish', sans-serif;
         font-size: 20px;
         margin-bottom: 20px;
@@ -140,7 +154,7 @@
         height: 50px;
         width: 300px;
         letter-spacing: 1px;
-        margin: 10px 0px;
+        margin: 50px 0px;
     }
 
     ::placeholder{
