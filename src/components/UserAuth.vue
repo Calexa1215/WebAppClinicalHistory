@@ -8,7 +8,9 @@
                     <input class="input" type="text" v-model="user_in.username" placeholder="Documento de identidad">
                     <h3>Contraseña:</h3>
                     <input class="input" type="password" v-model="user_in.password" placeholder="*******">
-                    <button class="buttom">Iniciar sesión</button>
+                    
+                    <button class="submit">Iniciar sesión</button>
+                   
                     <div class="login__container--remember-me">
                         <label>
                             <input type="checkbox" name="" id="cbox1" value="checkbos">Recuerdame
@@ -19,7 +21,7 @@
                 <p class="login__container--register">No tienes ninguna cuenta <a href="">Regístrate</a></p>
             </section>
             <section class="img__container">
-                <img src="public\Loginimg.png" alt="">
+                <img src="./Loginimg.png" >
             </section>
         </div> 
     </div>
@@ -48,9 +50,10 @@ export default {
 
     methods: {
         processAuthUser: async function(){
+            console.log(this.user_in)
             await this.$apollo.mutate({
                 mutation: gql`
-                mutation Mutation($authenticateCredentials: CredentialsInput!) {
+                mutation ($authenticateCredentials: CredentialsInput!) {
                 authenticate(credentials: $authenticateCredentials) {
                 access
                 refresh
@@ -60,7 +63,9 @@ export default {
                 authenticateCredentials: this.user_in
                 }
 
-            }).them((result) => {  }).catch((error)=>{
+            }).them((result) => { console.log(result)
+            let data = result.data.authenticate
+            }).catch((error)=>{
                 alert("Usuario o contraseña incorrectos")
                 });
 
