@@ -89,7 +89,6 @@ export default {
 <style>
   body{
     height: 665px;
-    background-image: url("../assets/img/background.jpg");
     background-size: 100%;
   }
   .header{

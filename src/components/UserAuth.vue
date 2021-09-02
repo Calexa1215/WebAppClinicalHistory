@@ -1,6 +1,4 @@
 <template>
-
-<body>
     <div id="AuthUser" class="auth_user">
         <div class="login">
             <section class="login__container">
@@ -21,11 +19,10 @@
                 <p class="login__container--register">No tienes ninguna cuenta <a href="">Regístrate</a></p>
             </section>
             <section class="img__container">
-                <img src="../assets/img/Loginimg.png" alt="">
+                <img src="public\Loginimg.png" alt="">
             </section>
         </div> 
     </div>
-</body>
 
 </template>
 
@@ -52,7 +49,7 @@ export default {
     methods: {
         processAuthUser: async function(){
             await this.$apollo.mutate({
-                mutation: gqlql`
+                mutation: gql`
                 mutation Mutation($authenticateCredentials: CredentialsInput!) {
                 authenticate(credentials: $authenticateCredentials) {
                 access
@@ -74,10 +71,14 @@ export default {
 
 </script>
 
-
-
-
 <style>
+
+    body {
+        height: 665px;
+        /* background-image: url("public\Fondo.jpg"); */
+        background-size: 100%;
+  
+    }
     .auth_user{
         display: flex;
         justify-content: center;
