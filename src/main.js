@@ -5,7 +5,7 @@ import { ApolloClient, createHttpLink, createHttpLink, HttpLink, InMemoryCache }
 import { createApolloProvider } from '@vue/apollo-option'
 
 const httpLink = createHttpLink({
-    uri: 'https://localhost:8080', //CAMBIAR POR URI DEL APIGATEWAY PROPIO
+    uri: 'https://api-gateway-clinical-history.herokuapp.com'
 })
 
 const apolloClient = new ApolloClient({

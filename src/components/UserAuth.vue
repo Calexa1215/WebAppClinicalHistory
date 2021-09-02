@@ -9,7 +9,7 @@
                     <h3>Documento de identidad:</h3>
                     <input class="input" type="text" v-model="user_in.username" placeholder="Documento de identidad">
                     <h3>Contraseña:</h3>
-                    <input class="input" type="password" v-model="uuser_in.password" placeholder="*******">
+                    <input class="input" type="password" v-model="user_in.password" placeholder="*******">
                     <button class="buttom">Iniciar sesión</button>
                     <div class="login__container--remember-me">
                         <label>
@@ -31,7 +31,51 @@
 
 <script>
 
+import gql from 'graphql-tag'
+import jwt_decode from "jwt-decode"
+
+export default {
+
+    name:"UserAuth",
+
+    data: function(){
+        return{
+            user_in: {
+                username:"",
+                password:"",
+            }
+        }
+    },
+
+
+
+    methods: {
+        processAuthUser: async function(){
+            await this.$apollo.mutate({
+                mutation: gqlql`
+                mutation Mutation($authenticateCredentials: CredentialsInput!) {
+                authenticate(credentials: $authenticateCredentials) {
+                access
+                refresh
+                }
+                }`,
+                variables:{
+                authenticateCredentials: this.user_in
+                }
+
+            }).them((result) => {  }).catch((error)=>{
+                alert("Usuario o contraseña incorrectos")
+                });
+
+
+        }
+    }
+}
+
 </script>
+
+
+
 
 <style>
     .auth_user{
