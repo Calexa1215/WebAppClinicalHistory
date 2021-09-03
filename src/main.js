@@ -5,7 +5,7 @@ import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core
 import { createApolloProvider } from '@vue/apollo-option'
 
 const httpLink = createHttpLink({
-    uri: 'https://mision-tic-apigateway.herokuapp.com/',
+    uri: 'https://api-gateway-clinical-history.herokuapp.com/',
 })
 
 const apolloClient = new ApolloClient({
