@@ -1,21 +1,18 @@
 <template>
+    
     <div id="app" class="app">
-        <div class="header">   
+        <div class="header">
+          <h1><i>CliniOnline</i></h1>
           <nav>
-            <button v-on:click="about" v-if="is_auth" > ABOUT </button>
-            <button v-on:click="login" v-if="is_auth" > LOG IN </button>
+            <button v-on:click="init" v-if="is_auth" > ABOUT </button>
+            <button v-on:click="logIn" v-if="is_auth" > LOG IN </button>
+            <button v-on:click="logOut" v-if="!is_auth"> LOG OUT </button>
           </nav>
         </div>
-    <div class="main-component">
-       <router-view v-on:log-in="logIn"></router-view>
- </div> 
-
-
-        <div class="description">
-            <h2>Bienvenido a su historia clínica ONline!</h2>
-            <p>Revise toda su trazabilidad clínica en un solo lugar y descarguela cuando requiera.</p>
-        </div>
-      </div>
+      <div class="main-component">
+        <router-view></router-view>
+      </div> 
+    </div>
 </template>
 
 <script>
@@ -26,7 +23,8 @@ export default {
 
   data: function(){
       return{ 
-        is_auth: false
+        is_auth: true,
+        autenticacion: false
       }    
   },
 
@@ -37,52 +35,37 @@ export default {
   methods:{
 
     updateAccessToken: async function(){
+      this.$router.push({name: "history"})
       if(localStorage.getItem('refresh_token')==null){
-        this.$router.push({name: "user_auth"})
-        this.is_auth = true
+        
         return;
       }
-      await this.$apollo.mutate({
-        mutation: gql`
-          mutation ($refreshTokenRefresh: String!) {
-            refreshToken(refresh: $refreshTokenRefresh) {
-              access
-            }
-          }`
-        , 
-        variables: {
-          refreshTokenRefresh: localStorage.getItem('refresh_token')
-        }
-      }).then((result) => {
-        localStorage.setItem('access_token', result.data.refreshToken.access)
-        this.is_auth = true
-      }).catch((error) => {
-        alert("Su sesión expiró, vuelva a iniciar sesión.")
-        this.$router.push({name: "user_auth"})
-        this.is_auth = true
-      });
+
+
     },
 
     logIn: async function(data, username){
-      localStorage.setItem('access_token', data.access)
-      localStorage.setItem('refresh_token', data.refresh)
-      localStorage.setItem('user_id', data.user_id)
-      localStorage.setItem('current_username', username)
-
+      
+      this.$router.push({name: "ConsultUser"})
       await this.updateAccessToken();
       if(this.is_auth) this.init();
     },
 
     init: function(){
       this.$router.push({name: "user_auth", params:{ username: localStorage.getItem("current_username") }})
+      this.is_auth = false
     },
 
+    fin: function(){
+      this.$router.push({name: "user_auth", params:{ username: localStorage.getItem("current_username") }})
+      this.is_auth = true
+    },
     logOut: async function(){
       localStorage.removeItem('access_token')
       localStorage.removeItem('refresh_token')
       localStorage.removeItem('user_id')
       localStorage.removeItem('current_username')
-
+      this.fin();
       await this.updateAccessToken();
     }   
   }
@@ -93,14 +76,16 @@ export default {
 <style>
  body{
     height: 665px;
-    background-size: 100%;
+    background-image: url("components/Fondo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   .header{
     position: fixed;
     left: 0px;
     top: 0px;
     width: 100%;
-    height: 100px;
+    height: 80px;
     margin: 0%;
     padding: 0;
     display: flex;
@@ -111,7 +96,7 @@ export default {
   .header nav {
     height: 100%;
     width: 40%;
-    margin-left: 70%;
+    margin-left: 50%;
     margin-right: 10%;
     display: flex;
     justify-content: space-around;

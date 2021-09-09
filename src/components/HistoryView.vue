@@ -1,9 +1,30 @@
 <template>
-
+    <div id="HistoryView" class="historyView">
+        <div class="header1">   
+        </div>
+         <div class="description">
+            <h2>Bienvenido a su historia clínica ONline!</h2>
+            <p>Revise toda su trazabilidad clínica en un solo lugar y descarguela cuando requiera.</p>
+        </div>
+      </div>
+       
 </template>
 
 <script>
 
+export default{
+
+    name:"HistoryView",
+
+    data: function(){
+        return{
+            user_in: {
+                username:"jeison colme",
+                password:"Gloria123",
+            }
+        }
+    }
+}
 </script>
 
 <style>
@@ -11,8 +32,8 @@
         margin: 0;
         padding: 0%;
         height: 100%;
-        width: 100%;
-    
+        width: 50%;
+        background-image: url("Fondo.jpg");
         display: flex;
         justify-content: center;
         align-items: center;
@@ -37,17 +58,17 @@
     }
 
     .auth_user form{
-        width: 50%;
+        width: 100%;
         
     }
 
     .auth_user input{
-        height: 40px;
-        width: 100%;
+        /* height: 40px;
+        width: 100%; */
 
         box-sizing: border-box;
         padding: 10px 20px;
-        margin: 5px 0;
+        margin: 5px 5px;
 
         border: 1px solid #283747;
         
