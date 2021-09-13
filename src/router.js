@@ -3,6 +3,7 @@ import App from './App.vue'
 import UserAuth from './components/UserAuth.vue'
 import Consult from './components/ConsultUser.vue'
 import History from './components/HistoryView.vue'
+import NewHistory from './components/NewHistoryRecord.vue'
 // import NewHistoryRecord from './components/NewHistoryRecord'
 // import HistoryView from './components/HistoryView'
 // import ConsultUser from './components/ConsultUser'
@@ -29,7 +30,13 @@ const routes = [{
     name: "history",
     component: History
 
+},
+{
+    path: '/NewHistory',
+    name: "NewHistory",
+    component: NewHistory
 }
+
 ]
 
 const router = createRouter({

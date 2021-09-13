@@ -39,6 +39,8 @@ export default {
 
     data: function(){
         return{
+        is_auth: true,
+        aut: false,
             user_in: {
                 username:"",
                 password:"",
@@ -46,11 +48,9 @@ export default {
         }
     },
 
-
-
     methods: {
-        processAuthUser: async function(){
-            console.log(this.user_in)
+processAuthUser: async function(){
+            // console.log(this.user_in)
             await this.$apollo.mutate({
                 mutation: gql`
                 mutation ($authenticateCredentials: CredentialsInput!) {
@@ -63,10 +63,16 @@ export default {
                 authenticateCredentials: this.user_in
                 }
 
-            }).them((result) => { console.log(result)
+            }).then((result) => {
             let data = result.data.authenticate
+            console.log(data)
+            this.$router.push({name:'NewHistory', params: {access:data}})
+            localStorage.setItem("access",data.access)
+            this.autenticacion=true
+            console.log(this)
             }).catch((error)=>{
-                alert("Usuario o contraseña incorrectos")
+                console.log(error)
+                alert("error : " + error)
                 });
 
 
@@ -75,6 +81,7 @@ export default {
 }
 
 </script>
+
 
 <style>
 
@@ -86,15 +93,16 @@ export default {
     }
     .auth_user{
         display: flex;
+        background-image: url("Fondo.jpg");
         justify-content: center;
     }
     .login{
         background-color: white;
-        width: 800px;
+        /* width: 100%; */
         display: flex;
         align-items: center; 
         justify-content: center;
-        padding: 0px 30px;  
+        padding: 50px 00px;  
         margin-top: 70px;
         min-height: calc(100vh - 400px);  /* Altura permanece igual por mas grande que sea el alto de la pantalla (100 vH = view hight, indica el porcentaje que ve el usuario) 200px */
     }
@@ -137,7 +145,7 @@ export default {
         font-size: 40px;
         font-weight: bold;
         color: rgb(85, 95, 192);
-        margin-left: 60px;
+        /* margin-left: 60px; */
     }
 
     .login__container p{
@@ -147,6 +155,7 @@ export default {
     .login__container--form{
         display: flex;
         flex-direction: column;
+
     }
     .login__container--label{
         font-size: 14px;
@@ -209,5 +218,9 @@ export default {
 
     ::placeholder{
         font-size: 15px;
+    }
+
+    .auth_user form {
+    width: 100%;
     }
 </style>
